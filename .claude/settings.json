@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Read(//c/Users/scast/Desktop/SCP/Marauders Map/Marauders-Map/**)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch --show-current)",
+      "Bash(git --no-optional-locks *)",
+      "Bash(npm test)",
+      "Bash(npm run build)",
+      "Bash(npm run compile)",
+      "Bash(npm run check-types)",
+      "Bash(npm run lint)",
+      "Bash(npm run test:server)",
+      "Bash(npm run test:webview)",
+      "Bash(node --test .claude/hooks/guard.test.mjs)",
+      "Bash(claude --help)",
+      "Bash(claude --version)",
+      "PowerShell(git status*)",
+      "PowerShell(git diff*)",
+      "PowerShell(git log*)",
+      "PowerShell(npm test)",
+      "PowerShell(npm run build)",
+      "PowerShell(node --test .claude/hooks/guard.test.mjs)"
+    ],
+    "ask": [
+      "Bash(git commit*)",
+      "Bash(git add*)",
+      "Bash(git switch*)",
+      "Bash(git checkout*)",
+      "Bash(git merge*)",
+      "Bash(git rebase*)",
+      "Bash(git reset*)",
+      "Bash(git restore*)",
+      "Bash(git mv*)",
+      "Bash(git rm*)",
+      "Bash(git stash*)",
+      "Bash(git tag*)",
+      "Bash(git remote*)",
+      "Bash(git fetch*)",
+      "Bash(git pull*)",
+      "Bash(npm install*)",
+      "Bash(npm i *)",
+      "Bash(npm ci*)",
+      "Bash(npx *)",
+      "Bash(gh *)",
+      "Bash(node dist/cli.js*)",
+      "Edit(/.claude/**)",
+      "Edit(/CLAUDE.md)",
+      "Edit(/docs/SPEC.md)",
+      "Edit(/package.json)",
+      "Edit(/package-lock.json)",
+      "Edit(/.gitignore)",
+      "Edit(/hogwarts.config.json)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(*git push*)",
+      "PowerShell(git push*)",
+      "PowerShell(*git push*)",
+      "Bash(*dangerously-skip-permissions*)",
+      "PowerShell(*dangerously-skip-permissions*)",
+      "Bash(*publish*)",
+      "PowerShell(*publish*)",
+      "Read(/.env)",
+      "Edit(/.env)",
+      "Read(//c/Users/scast/Desktop/SCP/Marauders Map/Marauders-Map/.env)",
+      "Read(//c/Users/scast/Desktop/SCP/Marauders Map/Marauders-Map/reports/**)",
+      "Edit(//c/Users/scast/Desktop/SCP/Marauders Map/Marauders-Map/**)",
+      "Edit(//c/Users/scast/.claude/**)",
+      "Edit(//c/Users/scast/.pixel-agents/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell|Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/guard.mjs"],
+            "timeout": 30,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
+  }
+}

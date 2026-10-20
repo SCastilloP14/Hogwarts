@@ -32,7 +32,11 @@ allure-report/
 !.env.example
 
 # Project-specific
-.claude
+# Claude Code (Hogwarts): commit the shared setup, keep personal files out
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
+CLAUDE.local.md
 .mcp.json
 /sprites-export
 .vercel/
